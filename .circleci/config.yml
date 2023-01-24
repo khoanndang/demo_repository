@@ -9,7 +9,6 @@ jobs:
     docker:
       - image: ../php/Dockerfile
     steps:
-      - checkout
       - run: cp demo_repository/.env.example demo_repository/.env
 
       # composer cache
