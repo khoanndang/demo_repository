@@ -1,6 +1,11 @@
-version: 2
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build_and_test:
+  build:
     docker:
       - image: ../php/Dockerfile
     steps:
@@ -19,3 +24,10 @@ jobs:
 
       # run test
       - run: phpcs --standard=Framgia app
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build-workflow:
+    jobs:
+      - build
