@@ -1,0 +1,185 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Swagger demo",
+        "description": "Swagger demo",
+        "contact": {
+            "email": "nguyen.khoa@rivercrane.vn"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/product/find-by-status": {
+            "get": {
+                "tags": [
+                    "PRODUCT"
+                ],
+                "summary": "Finds products by status",
+                "description": "API get products by status",
+                "operationId": "findByStatus",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that needed to be considered for filter",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "available",
+                            "enum": [
+                                "available",
+                                "pending",
+                                "sold"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/product/test-version": {
+            "get": {
+                "tags": [
+                    "PRODUCT"
+                ],
+                "summary": "Test version",
+                "description": "Test version",
+                "operationId": "testVersion",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/api/product/create-product": {
+            "post": {
+                "tags": [
+                    "PRODUCT"
+                ],
+                "summary": "Insert a new Product",
+                "description": "Insert a new Product",
+                "operationId": "storeProduct",
+                "requestBody": {
+                    "description": "Product to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Product"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "title": "Product2",
+                "description": "Product model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of Product",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "product_name": {
+                        "title": "product_name",
+                        "description": "name of Product",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "status of Product",
+                        "type": "status",
+                        "example": "sold"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Products": {
+                "title": "Products",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "Product--id": {
+                "name": "Product_id",
+                "in": "path",
+                "description": "Id of Product",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            }
+        }
+    }
+}
