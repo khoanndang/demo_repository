@@ -5,7 +5,7 @@ jobs:
       - image: /Users/khoanguyen/workspace/workspace/demo_first/php/Dockerfile
     steps:
       - checkout
-      - run: cp .env.example .env
+      - run: cp demo_repository/.env.example demo_repository/.env
 
       # composer cache
       - restore_cache:
