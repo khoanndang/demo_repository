@@ -1,21 +1,47 @@
 pipeline {
     agent any
-
+    tools {
+        maven "mvn3"
+    }
     stages {
-        stage('Build') {
+        stage("Checkout") {
+            when {
+                expression {
+                    return current_status == "closed" && merged == "true"
+                }
+            }
             steps {
-                echo 'Building..'
+                echo "Checkout done."
             }
         }
-        stage('Test') {
+        stage("Build") {
+            when {
+                expression {
+                    return current_status == "closed" && merged == "true"
+                }
+            }
             steps {
-                echo 'Testing..'
+                echo "Build done."
             }
         }
-        stage('Deploy') {
+        stage("Deploy") {
+            when {
+                expression {
+                    return current_status == "closed" && merged == "true"
+                }
+            }
             steps {
-                echo 'Deploying....'
+                echo "Deploy done."
             }
         }
+        stage("Notify") {
+            when {
+                expression {
+                    return current_status == "closed" && merged == "true"
+                }
+            }
+            steps {
+                echo "Notify when deploy success."
+            }
     }
 }
