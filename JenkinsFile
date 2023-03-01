@@ -43,5 +43,6 @@ pipeline {
             steps {
                 echo "Notify when deploy success."
             }
+        }
     }
 }
