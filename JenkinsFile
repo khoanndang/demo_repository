@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-        maven "mvn3"
-    }
     stages {
         stage("Checkout") {
             when {
