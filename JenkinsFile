@@ -1,44 +1,20 @@
 pipeline {
     agent any
+
     stages {
-        stage("Checkout") {
-            when {
-                expression {
-                    return current_status == "closed" && merged == "true"
-                }
-            }
+        stage('Build') {
             steps {
-                echo "Checkout done."
+                echo 'Building..'
             }
         }
-        stage("Build") {
-            when {
-                expression {
-                    return current_status == "closed" && merged == "true"
-                }
-            }
+        stage('Test') {
             steps {
-                echo "Build done."
+                echo 'Testing..'
             }
         }
-        stage("Deploy") {
-            when {
-                expression {
-                    return current_status == "closed" && merged == "true"
-                }
-            }
+        stage('Deploy') {
             steps {
-                echo "Deploy done."
-            }
-        }
-        stage("Notify") {
-            when {
-                expression {
-                    return current_status == "closed" && merged == "true"
-                }
-            }
-            steps {
-                echo "Notify when deploy success."
+                echo 'Deploying....'
             }
         }
     }
