@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 // echo 'Building..'
+                git 'https://github.com/khoanndang/demo_repository.git'
                 sh 'docker compose -d --build'
             }
         }
